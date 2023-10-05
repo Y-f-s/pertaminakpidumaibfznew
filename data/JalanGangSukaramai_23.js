@@ -1,0 +1,1 @@
+var json_JalanGangSukaramai_23 = {"type":"FeatureCollection","name":"JalanGangSukaramai_23","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null},"geometry":{"type":"MultiLineString","coordinates":[[[101.466927086235742,1.670033324674594],[101.466428630133805,1.670052054824033]]]}}]}

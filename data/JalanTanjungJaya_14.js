@@ -1,0 +1,1 @@
+var json_JalanTanjungJaya_14 = {"type":"FeatureCollection","name":"JalanTanjungJaya_14","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null,"Jarak":"1081"},"geometry":{"type":"MultiLineString","coordinates":[[[101.466927144767496,1.670033324674593],[101.476638844315687,1.669883132288768]]]}}]}

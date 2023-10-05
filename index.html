@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/ZonaBFZAcuanPagar62mPUPR_2.js"></script>
+        <script src="data/ZonaBFZAcuanParit50mSI_3.js"></script>
+        <script src="data/InfoHasilPendataanLahanWargaAreaBFZSI_4.js"></script>
+        <script src="data/InfoBangunanLokasiAreaBFZSI_5.js"></script>
+        <script src="data/AreaSekolahSMPN14KotaDumai_6.js"></script>
+        <script src="data/TitikSekolahSMPN14KotaDumai_7.js"></script>
+        <script src="data/AreaMasjidAlQiyam_8.js"></script>
+        <script src="data/MasjidAlQiyam_9.js"></script>
+        <script src="data/AreaTowerTelekomunikasi_10.js"></script>
+        <script src="data/TowerTelekomunikasixl_11.js"></script>
+        <script src="data/TiangPLNUP3Dumai_12.js"></script>
+        <script src="data/JalurROWPLNUP3Dumai_13.js"></script>
+        <script src="data/JalanTanjungJaya_14.js"></script>
+        <script src="data/JalanLintasDesa_15.js"></script>
+        <script src="data/JalanSibayak_16.js"></script>
+        <script src="data/JalanTanjungSari_17.js"></script>
+        <script src="data/JalanSiliwangi_18.js"></script>
+        <script src="data/JalanBudi_19.js"></script>
+        <script src="data/JalanGangBandes_20.js"></script>
+        <script src="data/JalanGangSetiabakti_21.js"></script>
+        <script src="data/JalanGangSetia_22.js"></script>
+        <script src="data/JalanGangSukaramai_23.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+        }
+        map.createPane('pane_CitraGoogleSatellite_0');
+        map.getPane('pane_CitraGoogleSatellite_0').style.zIndex = 400;
+        var layer_CitraGoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_CitraGoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_CitraGoogleSatellite_0;
+        map.addLayer(layer_CitraGoogleSatellite_0);
+        map.createPane('pane_CitraDroneNonGCPRTK_1');
+        map.getPane('pane_CitraDroneNonGCPRTK_1').style.zIndex = 401;
+        var img_CitraDroneNonGCPRTK_1 = 'data/CitraDroneNonGCPRTK_1.png';
+        var img_bounds_CitraDroneNonGCPRTK_1 = [[1.667981501,101.462806921],[1.671203142,101.481855084]];
+        var layer_CitraDroneNonGCPRTK_1 = new L.imageOverlay(img_CitraDroneNonGCPRTK_1,
+                                              img_bounds_CitraDroneNonGCPRTK_1,
+                                              {pane: 'pane_CitraDroneNonGCPRTK_1'});
+        bounds_group.addLayer(layer_CitraDroneNonGCPRTK_1);
+        map.addLayer(layer_CitraDroneNonGCPRTK_1);
+        function pop_ZonaBFZAcuanPagar62mPUPR_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_ZonaBFZAcuanPagar62mPUPR_2_0() {
+            return {
+                pane: 'pane_ZonaBFZAcuanPagar62mPUPR_2',
+                opacity: 1,
+                color: 'rgba(119,61,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(152,78,163,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ZonaBFZAcuanPagar62mPUPR_2');
+        map.getPane('pane_ZonaBFZAcuanPagar62mPUPR_2').style.zIndex = 402;
+        map.getPane('pane_ZonaBFZAcuanPagar62mPUPR_2').style['mix-blend-mode'] = 'normal';
+        var layer_ZonaBFZAcuanPagar62mPUPR_2 = new L.geoJson(json_ZonaBFZAcuanPagar62mPUPR_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ZonaBFZAcuanPagar62mPUPR_2',
+            layerName: 'layer_ZonaBFZAcuanPagar62mPUPR_2',
+            pane: 'pane_ZonaBFZAcuanPagar62mPUPR_2',
+            onEachFeature: pop_ZonaBFZAcuanPagar62mPUPR_2,
+            style: style_ZonaBFZAcuanPagar62mPUPR_2_0,
+        });
+        bounds_group.addLayer(layer_ZonaBFZAcuanPagar62mPUPR_2);
+        map.addLayer(layer_ZonaBFZAcuanPagar62mPUPR_2);
+        function pop_ZonaBFZAcuanParit50mSI_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_ZonaBFZAcuanParit50mSI_3_0() {
+            return {
+                pane: 'pane_ZonaBFZAcuanParit50mSI_3',
+                interactive: true,
+            }
+        }
+        function style_ZonaBFZAcuanParit50mSI_3_1() {
+            return {
+                pane: 'pane_ZonaBFZAcuanParit50mSI_3',
+                opacity: 1,
+                color: 'rgba(38,89,128,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ZonaBFZAcuanParit50mSI_3');
+        map.getPane('pane_ZonaBFZAcuanParit50mSI_3').style.zIndex = 403;
+        map.getPane('pane_ZonaBFZAcuanParit50mSI_3').style['mix-blend-mode'] = 'normal';
+        var layer_ZonaBFZAcuanParit50mSI_3 = new L.geoJson.multiStyle(json_ZonaBFZAcuanParit50mSI_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ZonaBFZAcuanParit50mSI_3',
+            layerName: 'layer_ZonaBFZAcuanParit50mSI_3',
+            pane: 'pane_ZonaBFZAcuanParit50mSI_3',
+            onEachFeature: pop_ZonaBFZAcuanParit50mSI_3,
+            styles: [style_ZonaBFZAcuanParit50mSI_3_0,style_ZonaBFZAcuanParit50mSI_3_1,]
+        });
+        bounds_group.addLayer(layer_ZonaBFZAcuanParit50mSI_3);
+        map.addLayer(layer_ZonaBFZAcuanParit50mSI_3);
+        function pop_InfoHasilPendataanLahanWargaAreaBFZSI_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_InfoHasilPendataanLahanWargaAreaBFZSI_4_0() {
+            return {
+                pane: 'pane_InfoHasilPendataanLahanWargaAreaBFZSI_4',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,205,185,1.0)',
+                interactive: true,
+            }
+        }
+        function style_InfoHasilPendataanLahanWargaAreaBFZSI_4_1() {
+            return {
+                pane: 'pane_InfoHasilPendataanLahanWargaAreaBFZSI_4',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_InfoHasilPendataanLahanWargaAreaBFZSI_4');
+        map.getPane('pane_InfoHasilPendataanLahanWargaAreaBFZSI_4').style.zIndex = 404;
+        map.getPane('pane_InfoHasilPendataanLahanWargaAreaBFZSI_4').style['mix-blend-mode'] = 'normal';
+        var layer_InfoHasilPendataanLahanWargaAreaBFZSI_4 = new L.geoJson.multiStyle(json_InfoHasilPendataanLahanWargaAreaBFZSI_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_InfoHasilPendataanLahanWargaAreaBFZSI_4',
+            layerName: 'layer_InfoHasilPendataanLahanWargaAreaBFZSI_4',
+            pane: 'pane_InfoHasilPendataanLahanWargaAreaBFZSI_4',
+            onEachFeature: pop_InfoHasilPendataanLahanWargaAreaBFZSI_4,
+            styles: [style_InfoHasilPendataanLahanWargaAreaBFZSI_4_0,style_InfoHasilPendataanLahanWargaAreaBFZSI_4_1,]
+        });
+        bounds_group.addLayer(layer_InfoHasilPendataanLahanWargaAreaBFZSI_4);
+        map.addLayer(layer_InfoHasilPendataanLahanWargaAreaBFZSI_4);
+        function pop_InfoBangunanLokasiAreaBFZSI_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_InfoBangunanLokasiAreaBFZSI_5_0() {
+            return {
+                pane: 'pane_InfoBangunanLokasiAreaBFZSI_5',
+                opacity: 1,
+                color: 'rgba(102,51,24,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(179,90,42,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_InfoBangunanLokasiAreaBFZSI_5');
+        map.getPane('pane_InfoBangunanLokasiAreaBFZSI_5').style.zIndex = 405;
+        map.getPane('pane_InfoBangunanLokasiAreaBFZSI_5').style['mix-blend-mode'] = 'normal';
+        var layer_InfoBangunanLokasiAreaBFZSI_5 = new L.geoJson(json_InfoBangunanLokasiAreaBFZSI_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_InfoBangunanLokasiAreaBFZSI_5',
+            layerName: 'layer_InfoBangunanLokasiAreaBFZSI_5',
+            pane: 'pane_InfoBangunanLokasiAreaBFZSI_5',
+            onEachFeature: pop_InfoBangunanLokasiAreaBFZSI_5,
+            style: style_InfoBangunanLokasiAreaBFZSI_5_0,
+        });
+        bounds_group.addLayer(layer_InfoBangunanLokasiAreaBFZSI_5);
+        map.addLayer(layer_InfoBangunanLokasiAreaBFZSI_5);
+        function pop_AreaSekolahSMPN14KotaDumai_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_AreaSekolahSMPN14KotaDumai_6_0() {
+            return {
+                pane: 'pane_AreaSekolahSMPN14KotaDumai_6',
+                interactive: true,
+            }
+        }
+        function style_AreaSekolahSMPN14KotaDumai_6_1() {
+            return {
+                pane: 'pane_AreaSekolahSMPN14KotaDumai_6',
+                opacity: 1,
+                color: 'rgba(247,225,55,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AreaSekolahSMPN14KotaDumai_6');
+        map.getPane('pane_AreaSekolahSMPN14KotaDumai_6').style.zIndex = 406;
+        map.getPane('pane_AreaSekolahSMPN14KotaDumai_6').style['mix-blend-mode'] = 'normal';
+        var layer_AreaSekolahSMPN14KotaDumai_6 = new L.geoJson.multiStyle(json_AreaSekolahSMPN14KotaDumai_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreaSekolahSMPN14KotaDumai_6',
+            layerName: 'layer_AreaSekolahSMPN14KotaDumai_6',
+            pane: 'pane_AreaSekolahSMPN14KotaDumai_6',
+            onEachFeature: pop_AreaSekolahSMPN14KotaDumai_6,
+            styles: [style_AreaSekolahSMPN14KotaDumai_6_0,style_AreaSekolahSMPN14KotaDumai_6_1,]
+        });
+        bounds_group.addLayer(layer_AreaSekolahSMPN14KotaDumai_6);
+        map.addLayer(layer_AreaSekolahSMPN14KotaDumai_6);
+        function pop_TitikSekolahSMPN14KotaDumai_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_TitikSekolahSMPN14KotaDumai_7_0() {
+            return {
+                pane: 'pane_TitikSekolahSMPN14KotaDumai_7',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/tourist_monument.svg',
+            iconSize: [19.0, 19.0]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TitikSekolahSMPN14KotaDumai_7');
+        map.getPane('pane_TitikSekolahSMPN14KotaDumai_7').style.zIndex = 407;
+        map.getPane('pane_TitikSekolahSMPN14KotaDumai_7').style['mix-blend-mode'] = 'normal';
+        var layer_TitikSekolahSMPN14KotaDumai_7 = new L.geoJson(json_TitikSekolahSMPN14KotaDumai_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TitikSekolahSMPN14KotaDumai_7',
+            layerName: 'layer_TitikSekolahSMPN14KotaDumai_7',
+            pane: 'pane_TitikSekolahSMPN14KotaDumai_7',
+            onEachFeature: pop_TitikSekolahSMPN14KotaDumai_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_TitikSekolahSMPN14KotaDumai_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TitikSekolahSMPN14KotaDumai_7);
+        map.addLayer(layer_TitikSekolahSMPN14KotaDumai_7);
+        function pop_AreaMasjidAlQiyam_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_AreaMasjidAlQiyam_8_0() {
+            return {
+                pane: 'pane_AreaMasjidAlQiyam_8',
+                interactive: true,
+            }
+        }
+        function style_AreaMasjidAlQiyam_8_1() {
+            return {
+                pane: 'pane_AreaMasjidAlQiyam_8',
+                opacity: 1,
+                color: 'rgba(56,128,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AreaMasjidAlQiyam_8');
+        map.getPane('pane_AreaMasjidAlQiyam_8').style.zIndex = 408;
+        map.getPane('pane_AreaMasjidAlQiyam_8').style['mix-blend-mode'] = 'normal';
+        var layer_AreaMasjidAlQiyam_8 = new L.geoJson.multiStyle(json_AreaMasjidAlQiyam_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreaMasjidAlQiyam_8',
+            layerName: 'layer_AreaMasjidAlQiyam_8',
+            pane: 'pane_AreaMasjidAlQiyam_8',
+            onEachFeature: pop_AreaMasjidAlQiyam_8,
+            styles: [style_AreaMasjidAlQiyam_8_0,style_AreaMasjidAlQiyam_8_1,]
+        });
+        bounds_group.addLayer(layer_AreaMasjidAlQiyam_8);
+        map.addLayer(layer_AreaMasjidAlQiyam_8);
+        function pop_MasjidAlQiyam_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_MasjidAlQiyam_9_0() {
+            return {
+                pane: 'pane_MasjidAlQiyam_9',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/place_of_worship_islamic3.svg',
+            iconSize: [19.0, 19.0]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MasjidAlQiyam_9');
+        map.getPane('pane_MasjidAlQiyam_9').style.zIndex = 409;
+        map.getPane('pane_MasjidAlQiyam_9').style['mix-blend-mode'] = 'normal';
+        var layer_MasjidAlQiyam_9 = new L.geoJson(json_MasjidAlQiyam_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MasjidAlQiyam_9',
+            layerName: 'layer_MasjidAlQiyam_9',
+            pane: 'pane_MasjidAlQiyam_9',
+            onEachFeature: pop_MasjidAlQiyam_9,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_MasjidAlQiyam_9_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_MasjidAlQiyam_9);
+        map.addLayer(layer_MasjidAlQiyam_9);
+        function pop_AreaTowerTelekomunikasi_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_AreaTowerTelekomunikasi_10_0() {
+            return {
+                pane: 'pane_AreaTowerTelekomunikasi_10',
+                opacity: 1,
+                color: 'rgba(128,62,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AreaTowerTelekomunikasi_10');
+        map.getPane('pane_AreaTowerTelekomunikasi_10').style.zIndex = 410;
+        map.getPane('pane_AreaTowerTelekomunikasi_10').style['mix-blend-mode'] = 'normal';
+        var layer_AreaTowerTelekomunikasi_10 = new L.geoJson(json_AreaTowerTelekomunikasi_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreaTowerTelekomunikasi_10',
+            layerName: 'layer_AreaTowerTelekomunikasi_10',
+            pane: 'pane_AreaTowerTelekomunikasi_10',
+            onEachFeature: pop_AreaTowerTelekomunikasi_10,
+            style: style_AreaTowerTelekomunikasi_10_0,
+        });
+        bounds_group.addLayer(layer_AreaTowerTelekomunikasi_10);
+        map.addLayer(layer_AreaTowerTelekomunikasi_10);
+        function pop_TowerTelekomunikasixl_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_TowerTelekomunikasixl_11_0() {
+            return {
+                pane: 'pane_TowerTelekomunikasixl_11',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/poi_tower_communications.svg',
+            iconSize: [19.0, 19.0]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TowerTelekomunikasixl_11');
+        map.getPane('pane_TowerTelekomunikasixl_11').style.zIndex = 411;
+        map.getPane('pane_TowerTelekomunikasixl_11').style['mix-blend-mode'] = 'normal';
+        var layer_TowerTelekomunikasixl_11 = new L.geoJson(json_TowerTelekomunikasixl_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TowerTelekomunikasixl_11',
+            layerName: 'layer_TowerTelekomunikasixl_11',
+            pane: 'pane_TowerTelekomunikasixl_11',
+            onEachFeature: pop_TowerTelekomunikasixl_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_TowerTelekomunikasixl_11_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TowerTelekomunikasixl_11);
+        map.addLayer(layer_TowerTelekomunikasixl_11);
+        function pop_TiangPLNUP3Dumai_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_TiangPLNUP3Dumai_12_0() {
+            return {
+                pane: 'pane_TiangPLNUP3Dumai_12',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/poi_tower_power.svg',
+            iconSize: [19.0, 19.0]
+        }),
+                interactive: true,
+            }
+        }
+        map.createPane('pane_TiangPLNUP3Dumai_12');
+        map.getPane('pane_TiangPLNUP3Dumai_12').style.zIndex = 412;
+        map.getPane('pane_TiangPLNUP3Dumai_12').style['mix-blend-mode'] = 'normal';
+        var layer_TiangPLNUP3Dumai_12 = new L.geoJson(json_TiangPLNUP3Dumai_12, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_TiangPLNUP3Dumai_12',
+            layerName: 'layer_TiangPLNUP3Dumai_12',
+            pane: 'pane_TiangPLNUP3Dumai_12',
+            onEachFeature: pop_TiangPLNUP3Dumai_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_TiangPLNUP3Dumai_12_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_TiangPLNUP3Dumai_12);
+        map.addLayer(layer_TiangPLNUP3Dumai_12);
+        function pop_JalurROWPLNUP3Dumai_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalurROWPLNUP3Dumai_13_0() {
+            return {
+                pane: 'pane_JalurROWPLNUP3Dumai_13',
+                opacity: 1,
+                color: 'rgba(219,30,42,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalurROWPLNUP3Dumai_13');
+        map.getPane('pane_JalurROWPLNUP3Dumai_13').style.zIndex = 413;
+        map.getPane('pane_JalurROWPLNUP3Dumai_13').style['mix-blend-mode'] = 'normal';
+        var layer_JalurROWPLNUP3Dumai_13 = new L.geoJson(json_JalurROWPLNUP3Dumai_13, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalurROWPLNUP3Dumai_13',
+            layerName: 'layer_JalurROWPLNUP3Dumai_13',
+            pane: 'pane_JalurROWPLNUP3Dumai_13',
+            onEachFeature: pop_JalurROWPLNUP3Dumai_13,
+            style: style_JalurROWPLNUP3Dumai_13_0,
+        });
+        bounds_group.addLayer(layer_JalurROWPLNUP3Dumai_13);
+        map.addLayer(layer_JalurROWPLNUP3Dumai_13);
+        function pop_JalanTanjungJaya_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanTanjungJaya_14_0() {
+            return {
+                pane: 'pane_JalanTanjungJaya_14',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_JalanTanjungJaya_14_1() {
+            return {
+                pane: 'pane_JalanTanjungJaya_14',
+                opacity: 1,
+                color: 'rgba(255,96,17,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanTanjungJaya_14');
+        map.getPane('pane_JalanTanjungJaya_14').style.zIndex = 414;
+        map.getPane('pane_JalanTanjungJaya_14').style['mix-blend-mode'] = 'normal';
+        var layer_JalanTanjungJaya_14 = new L.geoJson.multiStyle(json_JalanTanjungJaya_14, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanTanjungJaya_14',
+            layerName: 'layer_JalanTanjungJaya_14',
+            pane: 'pane_JalanTanjungJaya_14',
+            onEachFeature: pop_JalanTanjungJaya_14,
+            styles: [style_JalanTanjungJaya_14_0,style_JalanTanjungJaya_14_1,]
+        });
+        bounds_group.addLayer(layer_JalanTanjungJaya_14);
+        map.addLayer(layer_JalanTanjungJaya_14);
+        function pop_JalanLintasDesa_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanLintasDesa_15_0() {
+            return {
+                pane: 'pane_JalanLintasDesa_15',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_JalanLintasDesa_15_1() {
+            return {
+                pane: 'pane_JalanLintasDesa_15',
+                opacity: 1,
+                color: 'rgba(255,96,17,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanLintasDesa_15');
+        map.getPane('pane_JalanLintasDesa_15').style.zIndex = 415;
+        map.getPane('pane_JalanLintasDesa_15').style['mix-blend-mode'] = 'normal';
+        var layer_JalanLintasDesa_15 = new L.geoJson.multiStyle(json_JalanLintasDesa_15, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanLintasDesa_15',
+            layerName: 'layer_JalanLintasDesa_15',
+            pane: 'pane_JalanLintasDesa_15',
+            onEachFeature: pop_JalanLintasDesa_15,
+            styles: [style_JalanLintasDesa_15_0,style_JalanLintasDesa_15_1,]
+        });
+        bounds_group.addLayer(layer_JalanLintasDesa_15);
+        map.addLayer(layer_JalanLintasDesa_15);
+        function pop_JalanSibayak_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanSibayak_16_0() {
+            return {
+                pane: 'pane_JalanSibayak_16',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 8.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_JalanSibayak_16_1() {
+            return {
+                pane: 'pane_JalanSibayak_16',
+                opacity: 1,
+                color: 'rgba(255,96,17,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 6.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanSibayak_16');
+        map.getPane('pane_JalanSibayak_16').style.zIndex = 416;
+        map.getPane('pane_JalanSibayak_16').style['mix-blend-mode'] = 'normal';
+        var layer_JalanSibayak_16 = new L.geoJson.multiStyle(json_JalanSibayak_16, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanSibayak_16',
+            layerName: 'layer_JalanSibayak_16',
+            pane: 'pane_JalanSibayak_16',
+            onEachFeature: pop_JalanSibayak_16,
+            styles: [style_JalanSibayak_16_0,style_JalanSibayak_16_1,]
+        });
+        bounds_group.addLayer(layer_JalanSibayak_16);
+        map.addLayer(layer_JalanSibayak_16);
+        function pop_JalanTanjungSari_17(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanTanjungSari_17_0() {
+            return {
+                pane: 'pane_JalanTanjungSari_17',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_JalanTanjungSari_17_1() {
+            return {
+                pane: 'pane_JalanTanjungSari_17',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanTanjungSari_17');
+        map.getPane('pane_JalanTanjungSari_17').style.zIndex = 417;
+        map.getPane('pane_JalanTanjungSari_17').style['mix-blend-mode'] = 'normal';
+        var layer_JalanTanjungSari_17 = new L.geoJson.multiStyle(json_JalanTanjungSari_17, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanTanjungSari_17',
+            layerName: 'layer_JalanTanjungSari_17',
+            pane: 'pane_JalanTanjungSari_17',
+            onEachFeature: pop_JalanTanjungSari_17,
+            styles: [style_JalanTanjungSari_17_0,style_JalanTanjungSari_17_1,]
+        });
+        bounds_group.addLayer(layer_JalanTanjungSari_17);
+        map.addLayer(layer_JalanTanjungSari_17);
+        function pop_JalanSiliwangi_18(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanSiliwangi_18_0() {
+            return {
+                pane: 'pane_JalanSiliwangi_18',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_JalanSiliwangi_18_1() {
+            return {
+                pane: 'pane_JalanSiliwangi_18',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanSiliwangi_18');
+        map.getPane('pane_JalanSiliwangi_18').style.zIndex = 418;
+        map.getPane('pane_JalanSiliwangi_18').style['mix-blend-mode'] = 'normal';
+        var layer_JalanSiliwangi_18 = new L.geoJson.multiStyle(json_JalanSiliwangi_18, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanSiliwangi_18',
+            layerName: 'layer_JalanSiliwangi_18',
+            pane: 'pane_JalanSiliwangi_18',
+            onEachFeature: pop_JalanSiliwangi_18,
+            styles: [style_JalanSiliwangi_18_0,style_JalanSiliwangi_18_1,]
+        });
+        bounds_group.addLayer(layer_JalanSiliwangi_18);
+        map.addLayer(layer_JalanSiliwangi_18);
+        function pop_JalanBudi_19(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanBudi_19_0() {
+            return {
+                pane: 'pane_JalanBudi_19',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_JalanBudi_19_1() {
+            return {
+                pane: 'pane_JalanBudi_19',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'round',
+                lineJoin: 'round',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanBudi_19');
+        map.getPane('pane_JalanBudi_19').style.zIndex = 419;
+        map.getPane('pane_JalanBudi_19').style['mix-blend-mode'] = 'normal';
+        var layer_JalanBudi_19 = new L.geoJson.multiStyle(json_JalanBudi_19, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanBudi_19',
+            layerName: 'layer_JalanBudi_19',
+            pane: 'pane_JalanBudi_19',
+            onEachFeature: pop_JalanBudi_19,
+            styles: [style_JalanBudi_19_0,style_JalanBudi_19_1,]
+        });
+        bounds_group.addLayer(layer_JalanBudi_19);
+        map.addLayer(layer_JalanBudi_19);
+        function pop_JalanGangBandes_20(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanGangBandes_20_0() {
+            return {
+                pane: 'pane_JalanGangBandes_20',
+                opacity: 1,
+                color: 'rgba(250,255,57,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanGangBandes_20');
+        map.getPane('pane_JalanGangBandes_20').style.zIndex = 420;
+        map.getPane('pane_JalanGangBandes_20').style['mix-blend-mode'] = 'normal';
+        var layer_JalanGangBandes_20 = new L.geoJson(json_JalanGangBandes_20, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanGangBandes_20',
+            layerName: 'layer_JalanGangBandes_20',
+            pane: 'pane_JalanGangBandes_20',
+            onEachFeature: pop_JalanGangBandes_20,
+            style: style_JalanGangBandes_20_0,
+        });
+        bounds_group.addLayer(layer_JalanGangBandes_20);
+        map.addLayer(layer_JalanGangBandes_20);
+        function pop_JalanGangSetiabakti_21(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanGangSetiabakti_21_0() {
+            return {
+                pane: 'pane_JalanGangSetiabakti_21',
+                opacity: 1,
+                color: 'rgba(250,255,57,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanGangSetiabakti_21');
+        map.getPane('pane_JalanGangSetiabakti_21').style.zIndex = 421;
+        map.getPane('pane_JalanGangSetiabakti_21').style['mix-blend-mode'] = 'normal';
+        var layer_JalanGangSetiabakti_21 = new L.geoJson(json_JalanGangSetiabakti_21, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanGangSetiabakti_21',
+            layerName: 'layer_JalanGangSetiabakti_21',
+            pane: 'pane_JalanGangSetiabakti_21',
+            onEachFeature: pop_JalanGangSetiabakti_21,
+            style: style_JalanGangSetiabakti_21_0,
+        });
+        bounds_group.addLayer(layer_JalanGangSetiabakti_21);
+        map.addLayer(layer_JalanGangSetiabakti_21);
+        function pop_JalanGangSetia_22(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanGangSetia_22_0() {
+            return {
+                pane: 'pane_JalanGangSetia_22',
+                opacity: 1,
+                color: 'rgba(250,255,57,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanGangSetia_22');
+        map.getPane('pane_JalanGangSetia_22').style.zIndex = 422;
+        map.getPane('pane_JalanGangSetia_22').style['mix-blend-mode'] = 'normal';
+        var layer_JalanGangSetia_22 = new L.geoJson(json_JalanGangSetia_22, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanGangSetia_22',
+            layerName: 'layer_JalanGangSetia_22',
+            pane: 'pane_JalanGangSetia_22',
+            onEachFeature: pop_JalanGangSetia_22,
+            style: style_JalanGangSetia_22_0,
+        });
+        bounds_group.addLayer(layer_JalanGangSetia_22);
+        map.addLayer(layer_JalanGangSetia_22);
+        function pop_JalanGangSukaramai_23(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+        }
+
+        function style_JalanGangSukaramai_23_0() {
+            return {
+                pane: 'pane_JalanGangSukaramai_23',
+                opacity: 1,
+                color: 'rgba(250,255,57,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_JalanGangSukaramai_23');
+        map.getPane('pane_JalanGangSukaramai_23').style.zIndex = 423;
+        map.getPane('pane_JalanGangSukaramai_23').style['mix-blend-mode'] = 'normal';
+        var layer_JalanGangSukaramai_23 = new L.geoJson(json_JalanGangSukaramai_23, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JalanGangSukaramai_23',
+            layerName: 'layer_JalanGangSukaramai_23',
+            pane: 'pane_JalanGangSukaramai_23',
+            onEachFeature: pop_JalanGangSukaramai_23,
+            style: style_JalanGangSukaramai_23_0,
+        });
+        bounds_group.addLayer(layer_JalanGangSukaramai_23);
+        map.addLayer(layer_JalanGangSukaramai_23);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/JalanGangSukaramai_23.png" /> Jalan Gang Sukaramai': layer_JalanGangSukaramai_23,'<img src="legend/JalanGangSetia_22.png" /> Jalan Gang Setia': layer_JalanGangSetia_22,'<img src="legend/JalanGangSetiabakti_21.png" /> Jalan Gang Setiabakti': layer_JalanGangSetiabakti_21,'<img src="legend/JalanGangBandes_20.png" /> Jalan Gang Bandes': layer_JalanGangBandes_20,'<img src="legend/JalanBudi_19.png" /> Jalan Budi': layer_JalanBudi_19,'<img src="legend/JalanSiliwangi_18.png" /> Jalan Siliwangi': layer_JalanSiliwangi_18,'<img src="legend/JalanTanjungSari_17.png" /> Jalan Tanjung Sari': layer_JalanTanjungSari_17,'<img src="legend/JalanSibayak_16.png" /> Jalan Sibayak': layer_JalanSibayak_16,'<img src="legend/JalanLintasDesa_15.png" /> Jalan Lintas Desa': layer_JalanLintasDesa_15,'<img src="legend/JalanTanjungJaya_14.png" /> Jalan Tanjung Jaya': layer_JalanTanjungJaya_14,'<img src="legend/JalurROWPLNUP3Dumai_13.png" /> Jalur ROW PLN UP3 Dumai': layer_JalurROWPLNUP3Dumai_13,'<img src="legend/TiangPLNUP3Dumai_12.png" /> Tiang PLN UP3 Dumai': layer_TiangPLNUP3Dumai_12,'<img src="legend/TowerTelekomunikasixl_11.png" /> Tower Telekomunikasi (xl)': layer_TowerTelekomunikasixl_11,'<img src="legend/AreaTowerTelekomunikasi_10.png" /> Area Tower Telekomunikasi': layer_AreaTowerTelekomunikasi_10,'<img src="legend/MasjidAlQiyam_9.png" /> Masjid Al-Qiyam': layer_MasjidAlQiyam_9,'<img src="legend/AreaMasjidAlQiyam_8.png" /> Area Masjid Al-Qiyam': layer_AreaMasjidAlQiyam_8,'<img src="legend/TitikSekolahSMPN14KotaDumai_7.png" /> Titik Sekolah SMPN 14 Kota Dumai': layer_TitikSekolahSMPN14KotaDumai_7,'<img src="legend/AreaSekolahSMPN14KotaDumai_6.png" /> Area Sekolah SMPN 14 Kota Dumai': layer_AreaSekolahSMPN14KotaDumai_6,'<img src="legend/InfoBangunanLokasiAreaBFZSI_5.png" /> Info Bangunan Lokasi Area BFZ (SI)': layer_InfoBangunanLokasiAreaBFZSI_5,'<img src="legend/InfoHasilPendataanLahanWargaAreaBFZSI_4.png" /> Info Hasil Pendataan Lahan Warga Area BFZ (SI)': layer_InfoHasilPendataanLahanWargaAreaBFZSI_4,'<img src="legend/ZonaBFZAcuanParit50mSI_3.png" /> Zona BFZ Acuan Parit 50m (SI) ': layer_ZonaBFZAcuanParit50mSI_3,'<img src="legend/ZonaBFZAcuanPagar62mPUPR_2.png" /> Zona BFZ Acuan Pagar 62m (PUPR)': layer_ZonaBFZAcuanPagar62mPUPR_2,"Citra Drone (Non GCP RTK)": layer_CitraDroneNonGCPRTK_1,"Citra Google Satellite": layer_CitraGoogleSatellite_0,}).addTo(map);
+        setBounds();
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        </script>
+    </body>
+</html>

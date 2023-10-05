@@ -1,0 +1,1 @@
+var json_MasjidAlQiyam_9 = {"type":"FeatureCollection","name":"MasjidAlQiyam_9","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null},"geometry":{"type":"Point","coordinates":[101.46935303173727,1.669862072991671]}}]}

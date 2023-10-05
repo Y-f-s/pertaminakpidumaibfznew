@@ -1,0 +1,1 @@
+var json_JalanGangBandes_20 = {"type":"FeatureCollection","name":"JalanGangBandes_20","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null},"geometry":{"type":"MultiLineString","coordinates":[[[101.479003291555586,1.669348386522245],[101.478760267866562,1.66891852959259]]]}}]}

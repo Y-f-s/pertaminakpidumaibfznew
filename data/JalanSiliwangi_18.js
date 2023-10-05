@@ -1,0 +1,1 @@
+var json_JalanSiliwangi_18 = {"type":"FeatureCollection","name":"JalanSiliwangi_18","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null,"Jarak":53.158},"geometry":{"type":"MultiLineString","coordinates":[[[101.466927086235756,1.670033266142877],[101.466882192408818,1.669554652292959]]]}}]}

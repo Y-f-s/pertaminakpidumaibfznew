@@ -1,0 +1,1 @@
+var json_JalanBudi_19 = {"type":"FeatureCollection","name":"JalanBudi_19","crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:OGC:1.3:CRS84"}},"features":[{"type":"Feature","properties":{"id":null},"geometry":{"type":"MultiLineString","coordinates":[[[101.469766752485995,1.669989894140576],[101.469727419172187,1.66950852929996]]]}}]}
